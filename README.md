@@ -45,7 +45,7 @@ UI 개발 없이 백엔드 서버를 개발해야 하기 때문에, 각 API 에�
 
 </aside>
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/d02b62b2-a4b1-4225-985b-06c4566263b9/Untitled.png)
+![Untitled](https://teamsparta.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fd02b62b2-a4b1-4225-985b-06c4566263b9%2FUntitled.png?table=block&id=63094142-7f4b-47eb-a90e-6c85c2ca83dd&spaceId=83c75a39-3aba-4ba4-a792-7aefe4b07895&width=2000&userId=&cache=v2)
 
 1. 음식점 등록 및 조회
     - 음식점 정보 입력받아 등록
@@ -63,7 +63,7 @@ UI 개발 없이 백엔드 서버를 개발해야 하기 때문에, 각 API 에�
             1. 등록 시 입력한 음식점 정보 (name, minOrderPrice, deliveryFee)
             2. DB 테이블 ID (id)
 
-    [API 명세서](https://www.notion.so/a5fe16959bca4499acc7297e682a37f3)
+![img_1.png](img_1.png)
 
 2. 음식 등록 및 메뉴판 조회
     - 음식점 ID 및 음식 정보 입력받아 등록
@@ -82,7 +82,8 @@ UI 개발 없이 백엔드 서버를 개발해야 하기 때문에, 각 API 에�
             1. 등록 시 입력한 음식 정보 (name, price)
             2. DB 테이블 ID (id)
 
-    [API 명세서](https://www.notion.so/65f29fb53987440182c7400a762ad595)
+
+![img_2.png](img_2.png)
 
 3. 주문 요청하기 및 주문 조회
     - 주문 요청 시 배달 음식점 및 음식 정보 입력받음
@@ -111,4 +112,5 @@ UI 개발 없이 백엔드 서버를 개발해야 하기 때문에, 각 API 에�
     - 주문 조회
         - 그동안 성공한 모든 주문 요청을 조회 가능
 
-   [API 명세서](https://www.notion.so/543a3beabd5541f997b92ca619b81856)
+   ![img_3.png](img_3.png)
+   ![img_4.png](img_4.png)
