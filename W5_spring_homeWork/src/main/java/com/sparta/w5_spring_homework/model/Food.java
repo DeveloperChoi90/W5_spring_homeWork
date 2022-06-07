@@ -1,15 +1,19 @@
 package com.sparta.w5_spring_homework.model;
 
-import lombok.AccessLevel;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
 @NoArgsConstructor
+@AllArgsConstructor
 public class Food {
 
     @Id
@@ -27,10 +31,14 @@ public class Food {
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
 
+    @JsonBackReference
+    @OneToMany(mappedBy = "order")
+    private List<OrderFood> foods = new ArrayList<>();
+
     @Builder
-    public Food(Restaurant restaurant, Food food){
-        this.name = food.getName();
-        this.price = food.getPrice();
+    public Food(Restaurant restaurant, String name, Integer price){
+        this.name = name;
+        this.price = price;
         this.restaurant = restaurant;
     }
 }

@@ -30,7 +30,12 @@ dependencies {
 
     implementation group: 'org.json', name: 'json', version: '20160810'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
-}
+
+
+    // 테스트 코드를 위한 Lombok 라이브러리
+    testCompileOnly 'org.projectlombok:lombok:1.18.12'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.12'
+    }
 
 tasks.named('test') {
     useJUnitPlatform()

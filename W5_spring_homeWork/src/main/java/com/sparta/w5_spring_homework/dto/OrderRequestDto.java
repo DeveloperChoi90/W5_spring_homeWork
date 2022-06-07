@@ -8,9 +8,10 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 @Getter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class OrderRequestDto {
-    private Long restaurantId;
-    private List<FoodOrderRequestDto> foods;
+    private Long restaurantId;   // 음식점 id
+    private List<OrderFoodRequestDto> foods;    // 주문 음식 리스트
 }

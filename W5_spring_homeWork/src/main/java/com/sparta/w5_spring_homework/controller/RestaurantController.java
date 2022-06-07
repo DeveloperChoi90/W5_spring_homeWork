@@ -19,17 +19,16 @@ import java.util.List;
 public class RestaurantController {
 
     private final RestaurantRepository restaurantRepository;
-    private final FoodRepository foodRepository;
 
     private final RestaurantService restaurantService;
 
     @PostMapping("/restaurant/register")
-    public String registerRestaurant(@RequestBody RestaurantDto restaurantDto ){
+    public Restaurant registerRestaurant(@RequestBody RestaurantDto restaurantDto ){
         return restaurantService.registerRestaurant(restaurantDto);
     }
 
     @GetMapping("/restaurants")
-    public List<Restaurant> searchRestaurant(){
-        return restaurantRepository.findAll();
+    public List<RestaurantDto> searchRestaurant(){
+        return restaurantService.searchRestaurant();
     }
 }

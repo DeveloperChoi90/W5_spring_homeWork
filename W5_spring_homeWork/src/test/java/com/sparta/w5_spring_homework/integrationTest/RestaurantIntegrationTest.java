@@ -1,4 +1,4 @@
-package com.sparta.w5_spring_homework;
+package com.sparta.w5_spring_homework.integrationTest;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

@@ -21,7 +21,7 @@ public class Restaurant {
     private Long id;
 
     // restarant 이름
-    @Column(name = "restaurant_name")
+    @Column(name = "restaurant_name", nullable = false)
     private String name;
 
     // 최조주문가격
@@ -32,13 +32,13 @@ public class Restaurant {
     @Column(name = "delivery_fee", nullable = false)
     private Integer deliveryFee;
 
-
+    // 양방향 필요시 기재
 //    @OneToMany(mappedBy = "restaurant")
 //    private List<Food> foods = new ArrayList<>();
 
-    public Restaurant(RestaurantDto restaurantDto) {
-        this.name = restaurantDto.getName();
-        this.minOrderPrice = restaurantDto.getMinOrderPrice();
-        this.deliveryFee = restaurantDto.getDeliveryFee();
+    public Restaurant(String name, Integer minOrderPrice, Integer deliveryFee) {
+        this.name = name;
+        this.minOrderPrice = minOrderPrice;
+        this.deliveryFee = deliveryFee;
     }
 }
