@@ -36,10 +36,15 @@ public class OrderService {
         // OrderDto => Order Response
         Restaurant restaurant = restaurantRepository.findById(orderRequestDto.getRestaurantId()).orElseThrow(
                 () -> new IllegalArgumentException("음식점이 등록되어 있지 않습니다."));
-//        RestaurantDto restaurantDto = new RestaurantDto(restaurant);
 
         List<OrderFoodDto> orderFoodDtoList = new ArrayList<>(); // response list
         List<OrderFood> orderFoodList = new ArrayList<>(); // DB 저장 list
+
+        // TODO: 2022/06/08
+        // order 를 영속성 컨텍스트에 order를 저장하여 테이블에 반영
+        Order order = new Order();
+        orderRepository.save(order);
+
         int totalPrice = 0;
 
         for (OrderFoodRequestDto orderFoodRequestDto : orderRequestDto.getFoods()) {
@@ -52,8 +57,10 @@ public class OrderService {
 
             // OrderFood entity 저장
             OrderFood orderFood = new OrderFood(food, orderFoodRequestDto.getQuantity());
+            order.addOrderFood(orderFood);
             orderFoodList.add(orderFood);
-//            orderFoodRepository.save(orderFood);
+            orderFoodRepository.save(orderFood);
+            orderRepository.save(order);
 
             OrderFoodDto orderFoodDto = new OrderFoodDto(food, orderFoodRequestDto);
             orderFoodDtoList.add(orderFoodDto);
@@ -64,9 +71,11 @@ public class OrderService {
 
         if(totalPrice < restaurant.getMinOrderPrice()) throw new IllegalArgumentException("최소 주문 가격보다 적은 금액입니다.");
 
-        Order order = new Order(restaurant, orderFoodList, totalPrice);
+        // TODO: 2022/06/08
+        order.setRestaurant(restaurant);
+        order.setFoods(orderFoodList);
+        order.setTotalPrice(totalPrice);
         orderRepository.save(order);
-        orderFoodRepository.saveAll(orderFoodList);
 
         return new OrderDto(restaurant, orderFoodDtoList, totalPrice);
     }

@@ -3,6 +3,7 @@ package com.sparta.w5_spring_homework.model;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
@@ -35,5 +36,9 @@ public class OrderFood {
 //        this.order = order
         this.quantity = quantity;
         this.price = food.getPrice() * quantity;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
     }
 }

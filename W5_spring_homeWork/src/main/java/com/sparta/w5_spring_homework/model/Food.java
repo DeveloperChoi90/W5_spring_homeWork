@@ -32,7 +32,7 @@ public class Food {
     private Restaurant restaurant;
 
     @JsonBackReference
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "food")
     private List<OrderFood> foods = new ArrayList<>();
 
     @Builder
