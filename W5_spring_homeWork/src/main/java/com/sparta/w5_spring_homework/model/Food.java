@@ -14,24 +14,30 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@SequenceGenerator(
+        name = "FOOD_SEQ_GENERATOR",
+        sequenceName = "FOOD_SEQ",
+        initialValue = 1, allocationSize = 50
+)
 public class Food {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "FOOD_SEQ_GENERATOR")
     @Column(name = "food_id")
     private Long id;
 
-    @Column(name = "food_name", nullable = false)
+    @Column(name = "food_name")
     private String name;
 
-    @Column(name = "price", nullable = false)
+    @Column(name = "price")
     private Integer price;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
 
-    @JsonBackReference
+
     @OneToMany(mappedBy = "food")
     private List<OrderFood> foods = new ArrayList<>();
 

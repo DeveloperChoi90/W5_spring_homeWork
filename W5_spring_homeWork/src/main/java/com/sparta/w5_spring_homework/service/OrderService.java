@@ -41,12 +41,14 @@ public class OrderService {
         List<OrderFood> orderFoodList = new ArrayList<>(); // DB 저장 list
 
         // TODO: 2022/06/08
-        // order 를 영속성 컨텍스트에 order를 저장하여 테이블에 반영
+
+        // Order_id를 생성하기 위해 Order를 생성
         Order order = new Order();
         orderRepository.save(order);
 
         int totalPrice = 0;
 
+        //
         for (OrderFoodRequestDto orderFoodRequestDto : orderRequestDto.getFoods()) {
             Food food = foodRepository.findByIdAndRestaurant(orderFoodRequestDto.getId(), restaurant).orElseThrow(
                     ()-> new IllegalArgumentException("주문하신 음식은 등록되어 있지 않습니다."));
@@ -56,12 +58,14 @@ public class OrderService {
             }
 
             // OrderFood entity 저장
-            OrderFood orderFood = new OrderFood(food, orderFoodRequestDto.getQuantity());
-            order.addOrderFood(orderFood);
-            orderFoodList.add(orderFood);
-            orderFoodRepository.save(orderFood);
-            orderRepository.save(order);
+            OrderFood orderFood = new OrderFood(order, food, orderFoodRequestDto.getQuantity());
 
+            // 연관관계 편의 메소드를 통해 order와 orderfood 모두 저장
+            orderFood.getOrder().addOrderFood(orderFood);
+            orderFoodRepository.save(orderFood);
+
+
+            // OrderFoodDto 생성 -> Response로 전
             OrderFoodDto orderFoodDto = new OrderFoodDto(food, orderFoodRequestDto);
             orderFoodDtoList.add(orderFoodDto);
 
@@ -72,8 +76,8 @@ public class OrderService {
         if(totalPrice < restaurant.getMinOrderPrice()) throw new IllegalArgumentException("최소 주문 가격보다 적은 금액입니다.");
 
         // TODO: 2022/06/08
+        // TotalPrice 계산 후 Table에 저장할 멤버들을 set
         order.setRestaurant(restaurant);
-        order.setFoods(orderFoodList);
         order.setTotalPrice(totalPrice);
         orderRepository.save(order);
 
@@ -88,10 +92,8 @@ public class OrderService {
 
         for (Order order : orders) {
             List<OrderFoodDto> orderFoodDtoList = new ArrayList<>();
-//            System.out.println(order.getFoods());
             for(OrderFood orderFood : order.getFoods()){ // foods = order.getFoods() // List<OrderFood>
                 Food food = orderFood.getFood();
-//                Order order1 = orderFood.getOrder();
                 OrderFoodDto orderFoodDto = new OrderFoodDto(food, orderFood.getQuantity());
                 orderFoodDtoList.add(orderFoodDto);
             }

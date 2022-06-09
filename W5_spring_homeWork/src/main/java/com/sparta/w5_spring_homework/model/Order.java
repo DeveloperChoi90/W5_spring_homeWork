@@ -2,10 +2,10 @@ package com.sparta.w5_spring_homework.model;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -15,21 +15,29 @@ import java.util.List;
 @Table(name = "orders")
 @Getter
 @NoArgsConstructor
+@AllArgsConstructor
+@SequenceGenerator(
+        name = "ORDER_SEQ_GENERATOR",
+        sequenceName = "ORDER_SEQ",
+        initialValue = 1, allocationSize = 50
+)
+
 public class Order {
 
     @Id     // 기본키 설정
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ORDER_SEQ_GENERATOR")
     @Column(name = "order_id")
     private Long id;
 
     @Column(name = "order_total_price")
     private Integer totalPrice;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
 
-    @JsonBackReference
+
     @OneToMany(mappedBy = "order")
     private List<OrderFood> foods = new ArrayList<>();
 
@@ -49,6 +57,12 @@ public class Order {
 
     @Builder
     public Order(Restaurant restaurant, List<OrderFood> foods, Integer totalPrice){
+        this.restaurant = restaurant;
+        this.foods = foods;
+        this.totalPrice = totalPrice;
+    }
+
+    public void setOrder(Restaurant restaurant, List<OrderFood> foods, Integer totalPrice){
         this.restaurant = restaurant;
         this.foods = foods;
         this.totalPrice = totalPrice;

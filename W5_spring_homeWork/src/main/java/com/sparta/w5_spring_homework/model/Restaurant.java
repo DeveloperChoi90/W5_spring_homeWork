@@ -1,6 +1,7 @@
 package com.sparta.w5_spring_homework.model;
 
 import com.sparta.w5_spring_homework.dto.RestaurantDto;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,24 +13,30 @@ import javax.persistence.*;
 @Entity // DB 테이블 설정
 @Getter // getter 자동 생성
 @NoArgsConstructor // 기본생성자 자동생성
+@AllArgsConstructor
+@SequenceGenerator(
+        name = "RESTAURANT_SEQ_GENERATOR",
+        sequenceName = "RESTAURANT_SEQ",
+        initialValue = 1, allocationSize = 50
+)
 public class Restaurant {
 
     // 기본키 설정
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "RESTAURANT_SEQ_GENERATOR")
     @Column(name = "restaurant_id")
     private Long id;
 
     // restarant 이름
-    @Column(name = "restaurant_name", nullable = false)
+    @Column(name = "restaurant_name")
     private String name;
 
     // 최조주문가격
-    @Column(name = "min_order_price", nullable = false)
+    @Column(name = "min_order_price")
     private Integer minOrderPrice;
 
     // 배달비
-    @Column(name = "delivery_fee", nullable = false)
+    @Column(name = "delivery_fee")
     private Integer deliveryFee;
 
     // 양방향 필요시 기재
