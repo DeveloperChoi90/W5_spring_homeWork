@@ -1,9 +1,11 @@
 package com.sparta.w5_spring_homework.service;
 
 
-import com.sparta.w5_spring_homework.dto.*;
+import com.sparta.w5_spring_homework.dto.OrderDto;
+import com.sparta.w5_spring_homework.dto.OrderFoodDto;
+import com.sparta.w5_spring_homework.dto.OrderFoodRequestDto;
+import com.sparta.w5_spring_homework.dto.OrderRequestDto;
 import com.sparta.w5_spring_homework.model.Food;
-import com.sparta.w5_spring_homework.model.Order;
 import com.sparta.w5_spring_homework.model.OrderFood;
 import com.sparta.w5_spring_homework.model.Restaurant;
 import com.sparta.w5_spring_homework.repository.FoodRepository;
@@ -11,11 +13,11 @@ import com.sparta.w5_spring_homework.repository.OrderFoodRepository;
 import com.sparta.w5_spring_homework.repository.OrderRepository;
 import com.sparta.w5_spring_homework.repository.RestaurantRepository;
 import lombok.RequiredArgsConstructor;
-
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.criteria.Order;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,7 +40,6 @@ public class OrderService {
                 () -> new IllegalArgumentException("음식점이 등록되어 있지 않습니다."));
 
         List<OrderFoodDto> orderFoodDtoList = new ArrayList<>(); // response list
-        List<OrderFood> orderFoodList = new ArrayList<>(); // DB 저장 list
 
         // TODO: 2022/06/08
 

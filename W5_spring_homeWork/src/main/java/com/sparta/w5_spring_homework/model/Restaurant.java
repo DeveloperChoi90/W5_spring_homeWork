@@ -1,11 +1,8 @@
 package com.sparta.w5_spring_homework.model;
 
-import com.sparta.w5_spring_homework.dto.RestaurantDto;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.util.Assert;
 
 import javax.persistence.*;
 

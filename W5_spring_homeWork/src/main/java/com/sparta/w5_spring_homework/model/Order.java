@@ -21,7 +21,6 @@ import java.util.List;
         sequenceName = "ORDER_SEQ",
         initialValue = 1, allocationSize = 50
 )
-
 public class Order {
 
     @Id     // 기본키 설정

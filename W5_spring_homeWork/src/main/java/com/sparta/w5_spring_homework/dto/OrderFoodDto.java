@@ -1,12 +1,12 @@
 package com.sparta.w5_spring_homework.dto;
 
-
 import com.sparta.w5_spring_homework.model.Food;
-import com.sparta.w5_spring_homework.model.OrderFood;
-import lombok.*;
+import com.sparta.w5_spring_homework.dto.OrderFoodRequestDto;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class OrderFoodDto {
